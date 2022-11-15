@@ -1,0 +1,96 @@
+---
+title: "SocialNetwork3"
+author: "Antonio D'Alessandro"
+date: "2022-11-14"
+output: html_document
+---
+
+```{r setup, include=FALSE, warning=F}
+
+setwd("C:/Users/ajd430/Desktop/Rotations")
+
+library(statnet)
+library(latentnet)
+library(dplyr)
+
+
+load('fit7.RData')
+load('fit10.RData')
+
+
+```
+
+
+
+
+## Model 
+
+The Bayesian hierarchical model is given by:
+
+$$ 
+\text{logodds}(y_{i,j}=1 | Z_i, Z_j, x, \beta) = \Sigma_{k=1}^{p} x_{k,i,j}\beta_{k} - |Z_i - Z_j| \
+$$
+
+$$
+\beta_k \sim N(\xi_k,\psi_{k}^2) \hspace{2mm} k = 1,\ldots,p
+$$
+$$
+Z_i \sim \Sigma_{g=1}^{G} \lambda_{g}MVN_{d}(\mu_g,\sigma_{g}^2I_d) \hspace{2mm} i=1,\ldots,n
+$$
+
+$$
+\mu_g \sim MVN_{d}(0,\omega^2I_d) \hspace{2mm} g = 1,\ldots,G
+$$
+
+$$
+\sigma_{g}^2 \sim \sigma_{0}^2Inv\chi_{\alpha}^2 \hspace{2mm} g = 1,\ldots,G
+$$
+$$
+(\lambda_1,\ldots,\lambda_{G}) \sim Dirichlet(\nu_1,\ldots,\nu_G)
+$$
+
+
+
+## MCMC Diagnostics Fit 7
+```{r}
+mcmc.diagnostics(fit7, which.diags = c("acf"))
+```
+
+```{r}
+mcmc.diagnostics(fit7, which.diags = c("trace"))
+```
+
+## MCMC Diagnostics Fit 10
+```{r}
+mcmc.diagnostics(fit10, which.diags = c("acf"))
+```
+
+```{r}
+mcmc.diagnostics(fit10, which.diags = c("trace"))
+```
+
+
+
+## Latent Space Plot
+
+```{r, warning=F}
+
+plot(fit7, labels=F, print.formula=F, main='Fit7')
+
+```
+
+
+```{r, warning=F}
+
+plot(fit10, labels=F, print.formula=F, main='Fit10')
+
+
+```
+
+
+```{r}
+
+
+```
+
+
