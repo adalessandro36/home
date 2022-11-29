@@ -3,13 +3,13 @@ library(igraph)
 library(mice)
 set.seed(1987)
 
-load("C:/Users/Antonio/Desktop/Glasgow_data/Glasgow-demographic.RData")
-load("C:/Users/Antonio/Desktop/Glasgow_data/Glasgow-friendship.RData")
-load("C:/Users/Antonio/Desktop/Glasgow_data/Glasgow-geographic.RData")
-load("C:/Users/Antonio/Desktop/Glasgow_data/Glasgow-lifestyle.RData")
-load("C:/Users/Antonio/Desktop/Glasgow_data/Glasgow-selections.RData")
-load("C:/Users/Antonio/Desktop/Glasgow_data/Glasgow-substances.RData")
-load("C:/Users/Antonio/Desktop/Glasgow_data/Glasgow-various.RData")
+load("C:/Users/ajd430/Desktop/Rotations/imputation_project/Glasgow-demographic.RData")
+load("C:/Users/ajd430/Desktop/Rotations/imputation_project/Glasgow-friendship.RData")
+load("C:/Users/ajd430/Desktop/Rotations/imputation_project/Glasgow-geographic.RData")
+load("C:/Users/ajd430/Desktop/Rotations/imputation_project/Glasgow-lifestyle.RData")
+load("C:/Users/ajd430/Desktop/Rotations/imputation_project/Glasgow-selections.RData")
+load("C:/Users/ajd430/Desktop/Rotations/imputation_project/Glasgow-substances.RData")
+load("C:/Users/ajd430/Desktop/Rotations/imputation_project/Glasgow-various.RData")
 
 
 Y <- cbind(age,sex.F,tobacco[,1],romantic[,1],music1,money[,1],leisure1,familysmoking, dist.school, cannabis[,1], alcohol[,1])
@@ -61,6 +61,14 @@ V(network)$betweenness <- network_bw
 # eigen vector centrality 
 eigen <- eigen_centrality(network, directed=F)
 V(network)$eigen <- eigen$vector
+
+# closeness
+close <- closeness(network)
+V(network)$close <- close
+
+
+
+
 
 
 #compare stats for actor 2 with the rest of the network 
